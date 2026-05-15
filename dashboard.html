@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dark-mode.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
 </head>
 <body class="bg-dark text-gray-200 overflow-hidden flex h-screen">
     
@@ -100,7 +101,7 @@
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
-        <div class="flex flex-col items-center gap-6 px-4 py-8 overflow-y-auto">
+        <div class="flex flex-col items-center justify-start gap-6 px-4 py-8 overflow-y-auto flex-grow">
             <a href="index.html" class="text-2xl font-bold text-gray-300">Home 1</a>
             <a href="home2.html" class="text-2xl font-bold text-gray-300">Home 2</a>
             <a href="about.html" class="text-2xl font-bold text-gray-300">About</a>
@@ -521,13 +522,19 @@
         const overlay = document.getElementById('sidebar-overlay');
 
         function openSidebar() {
-            sidebar.classList.remove('-translate-x-full');
+            sidebar.classList.add('translate-x-0');
+            sidebar.classList.remove('-translate-x-full', 'translate-x-full');
             overlay.classList.remove('hidden');
             document.body.classList.add('overflow-hidden');
         }
 
         function closeSidebar() {
-            sidebar.classList.add('-translate-x-full');
+            sidebar.classList.remove('translate-x-0');
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                sidebar.classList.add('translate-x-full');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+            }
             overlay.classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
         }
@@ -574,5 +581,6 @@
             }
         });
     </script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

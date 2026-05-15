@@ -15,6 +15,98 @@ body {
     overflow-x: hidden;
 }
 
+/* Limit text palette to white + primary on selected public pages */
+.limited-text-palette .text-gray-300,
+.limited-text-palette .text-gray-200,
+.limited-text-palette .text-gray-400,
+.limited-text-palette .text-gray-500,
+.limited-text-palette .text-gray-600,
+.limited-text-palette .text-slate-300,
+.limited-text-palette .text-slate-400,
+.limited-text-palette .text-slate-500 {
+    color: #ffffff !important;
+}
+
+.limited-text-palette .text-secondary,
+.limited-text-palette .text-success,
+.limited-text-palette .text-warning,
+.limited-text-palette .text-blue-500,
+.limited-text-palette .text-green-500,
+.limited-text-palette .text-red-500,
+.limited-text-palette .text-red-400,
+.limited-text-palette .text-yellow-500,
+.limited-text-palette .text-danger {
+    color: var(--primary) !important;
+}
+
+.limited-text-palette .hover\:text-secondary:hover,
+.limited-text-palette .hover\:text-success:hover,
+.limited-text-palette .hover\:text-warning:hover,
+.limited-text-palette .hover\:text-blue-500:hover,
+.limited-text-palette .hover\:text-green-500:hover,
+.limited-text-palette .hover\:text-red-500:hover,
+.limited-text-palette .hover\:text-yellow-500:hover,
+.limited-text-palette .hover\:text-danger:hover {
+    color: var(--primary) !important;
+}
+
+.limited-text-palette .group:hover .group-hover\:text-secondary,
+.limited-text-palette .group:hover .group-hover\:text-success,
+.limited-text-palette .group:hover .group-hover\:text-warning,
+.limited-text-palette .group:hover .group-hover\:text-blue-500,
+.limited-text-palette .group:hover .group-hover\:text-green-500,
+.limited-text-palette .group:hover .group-hover\:text-red-500,
+.limited-text-palette .group:hover .group-hover\:text-red-400,
+.limited-text-palette .group:hover .group-hover\:text-yellow-500,
+.limited-text-palette .group:hover .group-hover\:text-danger {
+    color: var(--primary) !important;
+}
+
+.limited-text-palette .text-gradient,
+.limited-text-palette .text-transparent {
+    background: none !important;
+    color: var(--primary) !important;
+    -webkit-text-fill-color: var(--primary) !important;
+}
+
+/* In light mode use black + primary on selected public pages */
+.limited-text-palette.light-mode .text-white,
+.limited-text-palette.light-mode .text-gray-200,
+.limited-text-palette.light-mode .text-gray-300,
+.limited-text-palette.light-mode .text-gray-400,
+.limited-text-palette.light-mode .text-gray-500,
+.limited-text-palette.light-mode .text-gray-600,
+.limited-text-palette.light-mode .text-slate-300,
+.limited-text-palette.light-mode .text-slate-400,
+.limited-text-palette.light-mode .text-slate-500 {
+    color: #000000 !important;
+}
+
+/* Ensure image overlays and dark-bg components keep white text in light mode */
+.limited-text-palette.light-mode .keep-white,
+.limited-text-palette.light-mode [class*="from-black"] * {
+    color: #ffffff !important;
+}
+
+/* Keep About -> Technical Arsenal content crisp (no blur effect) */
+#technical-arsenal {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+#technical-arsenal,
+#technical-arsenal * {
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Force transforms to none after AOS animation to prevent subpixel blurring */
+#technical-arsenal [data-aos].aos-animate {
+    transform: none !important;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
 }
@@ -35,6 +127,18 @@ h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep desktop navbar utility buttons visually consistent */
+#header a[title="Dashboard"],
+#header #theme-toggle,
+#header #rtl-toggle {
+    width: 2.5rem;
+    height: 2.25rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .text-gradient {
@@ -123,4 +227,36 @@ h1, h2, h3, h4, h5, h6 {
         align-items: center;
         justify-content: center;
     }
+}
+
+/* Dashboard RTL Support */
+[dir="rtl"] #dashboard-sidebar {
+    left: auto !important;
+    right: 0 !important;
+}
+
+@media (max-width: 1023px) {
+    [dir="rtl"] #dashboard-sidebar {
+        transform: translateX(100%) !important;
+    }
+    [dir="rtl"] #dashboard-sidebar:not(.translate-x-0) {
+        transform: translateX(100%) !important;
+    }
+    [dir="rtl"] #dashboard-sidebar.translate-x-0 {
+        transform: translateX(0) !important;
+    }
+}
+
+[dir="rtl"] .flex-1.flex.flex-col {
+    direction: rtl;
+}
+
+[dir="rtl"] .ml-2 {
+    margin-left: 0;
+    margin-right: 0.5rem;
+}
+
+[dir="rtl"] .mr-2 {
+    margin-right: 0;
+    margin-left: 0.5rem;
 }

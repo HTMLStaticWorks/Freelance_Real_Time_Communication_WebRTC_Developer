@@ -33,9 +33,16 @@ body.light-mode h6 {
 }
 
 body.light-mode .bg-slate-800,
-body.light-mode .bg-slate-900 {
+body.light-mode .bg-slate-900,
+body.light-mode .bg-slate-900\/50,
+body.light-mode .bg-dark,
+body.light-mode .bg-dark\/95 {
     background-color: #ffffff !important;
     border-color: #e2e8f0 !important;
+}
+
+body.light-mode #mobile-menu {
+    background-color: rgba(255, 255, 255, 0.98) !important;
 }
 
 body.light-mode input, body.light-mode textarea {
@@ -57,3 +64,77 @@ body.light-mode footer a:hover {
     color: #00D2FF !important;
 }
 
+/* Fix for background images with overlay blend mode in light mode */
+body.light-mode .glass.bg-blend-overlay {
+    background-blend-mode: normal !important;
+}
+
+/* Mobile Menu Icons Light Mode */
+body.light-mode #mobile-menu-btn,
+body.light-mode #close-menu-btn,
+body.light-mode #dashboard-menu-btn,
+body.light-mode #mobile-menu-btn i,
+body.light-mode #close-menu-btn i,
+body.light-mode #dashboard-menu-btn i {
+    color: #0f172a !important;
+}
+
+body.light-mode i.fas, 
+body.light-mode i.fab, 
+body.light-mode i.far {
+    color: inherit;
+}
+
+body.light-mode .bg-white\/5,
+body.light-mode .bg-white\/10,
+body.light-mode .bg-black\/30 {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .border-white\/5,
+body.light-mode .border-white\/10 {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .hover\:bg-white\/5:hover,
+body.light-mode .hover\:bg-white\/10:hover {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-mode .bg-black\/50 {
+    background-color: #f1f5f9 !important;
+    border: 1px solid #e2e8f0;
+}
+
+body.light-mode .font-mono.text-gray-300 {
+    color: #475569 !important;
+}
+
+/* Dashboard Sidebar Light Mode Fixes */
+body.light-mode .nav-item {
+    color: #64748b !important;
+}
+
+body.light-mode .nav-item:hover {
+    background-color: #f1f5f9 !important;
+    color: #0ea5e9 !important;
+}
+
+body.light-mode .nav-item.bg-primary\/10 {
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    border-color: #bae6fd !important;
+}
+
+body.light-mode .text-gray-500 {
+    color: #64748b !important;
+}
+
+body.light-mode #dashboard-sidebar {
+    background-color: #ffffff !important;
+    border-right: 1px solid #e2e8f0 !important;
+}
+
+body.light-mode .nav-item i {
+    color: inherit !important;
+}

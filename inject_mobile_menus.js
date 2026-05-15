@@ -15,10 +15,10 @@ const links = [
     { name: 'Home 2', href: 'home2.html' },
     { name: 'About', href: 'about.html' },
     { name: 'Services', href: 'services.html' },
-    { name: 'Dashboard', href: 'dashboard.html' },
     { name: 'Pricing', href: 'pricing.html' },
     { name: 'Blog', href: 'blog.html' },
-    { name: 'Contact', href: 'contact.html' }
+    { name: 'Contact', href: 'contact.html' },
+    { name: 'Dashboard', href: 'dashboard.html', special: true }
 ];
 
 pages.forEach(page => {
@@ -34,17 +34,20 @@ pages.forEach(page => {
     const menuLinks = links.map(link => {
         const isActive = link.name === page.active;
         const colorClass = isActive ? 'text-primary' : 'text-gray-300';
+        if (link.special) {
+            return `            <a href="${link.href}" class="text-2xl font-bold ${colorClass} mt-4 border-t border-white/10 pt-4 w-full text-center">${link.name}</a>`;
+        }
         return `            <a href="${link.href}" class="text-2xl font-bold ${colorClass}">${link.name}</a>`;
     }).join('\n');
 
     const overlayHtml = `    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-dark/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 lg:hidden flex flex-col">
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-dark/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 xl:hidden flex flex-col">
         <div class="flex justify-end p-6">
             <button id="close-menu-btn" class="text-gray-400 hover:text-white">
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
-        <div class="flex flex-col items-center gap-6 px-4 py-8 overflow-y-auto">
+        <div class="flex flex-col items-center justify-start gap-6 px-4 py-8 overflow-y-auto flex-grow">
 ${menuLinks}
             
             <div class="flex gap-4 mt-8 w-full justify-center">

@@ -27,8 +27,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dark-mode.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
 </head>
-<body class="antialiased selection:bg-primary selection:text-white relative">
+<body class="limited-text-palette antialiased selection:bg-primary selection:text-white relative">
 
     <!-- Header -->
     <!-- Header -->
@@ -92,7 +93,7 @@
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
-        <div class="flex flex-col items-center gap-6 px-4 py-8 overflow-y-auto">
+        <div class="flex flex-col items-center justify-start gap-6 px-4 py-8 overflow-y-auto flex-grow">
             <a href="index.html" class="text-2xl font-bold text-primary">Home 1</a>
             <a href="home2.html" class="text-2xl font-bold text-gray-300">Home 2</a>
             <a href="about.html" class="text-2xl font-bold text-gray-300">About</a>
@@ -106,9 +107,6 @@
                 <a href="login.html" class="bg-gradient-to-r from-primary to-secondary text-white font-bold px-8 py-3 rounded-lg w-full max-w-xs text-center btn-glow">Login</a>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
     </div>
 
     <!-- Main Content -->
@@ -145,14 +143,14 @@
                         <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-xl leading-relaxed">
                             Building scalable peer-to-peer communication systems with optimized TURN/STUN infrastructure and real-time monitoring dashboards.
                         </p>
-                        <div class="flex flex-wrap gap-4">
-                            <a href="contact.html" class="bg-gradient-to-r from-primary to-secondary text-white font-bold px-8 py-4 rounded-lg btn-glow inline-flex items-center gap-2">
-                                Book Consultation <i class="fas fa-arrow-right"></i>
-                            </a>
-                            <a href="dashboard.html" class="glass text-white font-bold px-8 py-4 rounded-lg hover:bg-white/10 transition-colors inline-flex items-center gap-2">
-                                View Live Demo <i class="fas fa-desktop"></i>
-                            </a>
-                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start" data-aos="fade-up" data-aos-delay="400">
+                    <a href="contact.html" class="w-full sm:w-auto sm:min-w-[220px] inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-secondary text-white font-bold px-8 py-4 rounded-xl btn-glow group transition-all duration-300 transform hover:scale-105">
+                        Book Consultation <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                    <a href="dashboard.html" class="w-full sm:w-auto sm:min-w-[220px] inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-bold px-8 py-4 rounded-xl border border-white/10 transition-all duration-300 transform hover:scale-105">
+                        View Live Demo <i class="fas fa-desktop"></i>
+                    </a>
+                </div>
                         <div class="mt-10 flex gap-6 items-center">
                             <div class="flex -space-x-4">
                                 <img class="w-12 h-12 rounded-full border-2 border-dark" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" alt="User">
@@ -206,13 +204,13 @@
                             </div>
 
                             <!-- Latency Badges absolute positioned -->
-                            <div class="absolute -top-6 -right-6 glass px-4 py-2 rounded-lg border border-primary/50 text-primary font-bold shadow-[0_0_15px_rgba(0,210,255,0.3)] animate-pulse">
+                            <div class="absolute -top-4 right-4 md:-top-6 md:-right-6 glass px-2 md:px-4 py-1 md:py-2 rounded-lg border border-primary/50 text-primary font-bold text-xs md:text-base shadow-[0_0_15px_rgba(0,210,255,0.3)] animate-pulse z-10">
                                 18ms
                             </div>
-                            <div class="absolute top-1/2 -left-8 glass px-4 py-2 rounded-lg border border-secondary/50 text-secondary font-bold shadow-[0_0_15px_rgba(124,58,237,0.3)] float-anim" style="animation-delay: 1s;">
+                            <div class="absolute top-1/4 left-2 md:top-1/2 md:-left-8 glass px-2 md:px-4 py-1 md:py-2 rounded-lg border border-secondary/50 text-secondary font-bold text-xs md:text-base shadow-[0_0_15px_rgba(124,58,237,0.3)] float-anim z-10" style="animation-delay: 1s;">
                                 24ms
                             </div>
-                            <div class="absolute -bottom-4 right-10 glass px-4 py-2 rounded-lg border border-success/50 text-success font-bold shadow-[0_0_15px_rgba(34,197,94,0.3)] float-anim" style="animation-delay: 2s;">
+                            <div class="absolute -bottom-2 right-4 md:-bottom-4 md:right-10 glass px-2 md:px-4 py-1 md:py-2 rounded-lg border border-success/50 text-success font-bold text-xs md:text-base shadow-[0_0_15px_rgba(34,197,94,0.3)] float-anim z-10" style="animation-delay: 2s;">
                                 32ms
                             </div>
                         </div>
@@ -459,7 +457,7 @@
     <!-- Footer -->
     <footer class="bg-slate-900 border-t border-white/10 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xl neon-border">
@@ -494,6 +492,17 @@
                         <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
                     </ul>
                 </div>
+            
+                <div>
+                    <h4 class="text-white font-bold mb-6">Stay Connected</h4>
+                    <p class="text-gray-400 mb-4">Get cat updates and event news straight to your inbox.</p>
+                    <div class="flex items-center bg-white/5 border border-white/10 rounded-xl p-2">
+                        <input type="email" placeholder="Your email" class="w-full bg-transparent text-gray-300 placeholder:text-gray-500 focus:outline-none px-2">
+                        <button type="button" aria-label="Subscribe" class="w-10 h-10 rounded-lg bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -515,3 +524,6 @@
     <script src="assets/js/dashboard.js"></script>
 </body>
 </html>
+
+
+

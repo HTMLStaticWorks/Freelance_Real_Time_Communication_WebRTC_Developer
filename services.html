@@ -17,8 +17,9 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dark-mode.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
 </head>
-<body class="bg-dark text-gray-200">
+<body class="limited-text-palette bg-dark text-gray-200">
         <!-- Header -->
     <!-- Header -->
     <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
@@ -74,14 +75,14 @@
         </div>
     </header>
 
-                <!-- Mobile Menu Overlay -->
+    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-[60] bg-dark/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 xl:hidden flex flex-col">
         <div class="flex justify-end p-6">
             <button id="close-menu-btn" class="text-gray-400 hover:text-white">
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
-        <div class="flex flex-col items-center gap-6 px-4 py-8 overflow-y-auto">
+        <div class="flex flex-col items-center justify-start gap-6 px-4 py-8 overflow-y-auto flex-grow">
             <a href="index.html" class="text-2xl font-bold text-gray-300">Home 1</a>
             <a href="home2.html" class="text-2xl font-bold text-gray-300">Home 2</a>
             <a href="about.html" class="text-2xl font-bold text-gray-300">About</a>
@@ -89,12 +90,21 @@
             <a href="pricing.html" class="text-2xl font-bold text-gray-300">Pricing</a>
             <a href="blog.html" class="text-2xl font-bold text-gray-300">Blog</a>
             <a href="contact.html" class="text-2xl font-bold text-gray-300">Contact</a>
-            <a href="dashboard.html" class="text-2xl font-bold text-gray-300">Dashboard</a>
+            <a href="dashboard.html" class="text-2xl font-bold text-gray-300 mt-4 border-t border-white/10 pt-4 w-full text-center">Dashboard</a>
             
             <div class="flex gap-4 mt-8 w-full justify-center">
                 <a href="login.html" class="bg-gradient-to-r from-primary to-secondary text-white font-bold px-8 py-3 rounded-lg w-full max-w-xs text-center btn-glow">Login</a>
             </div>
         </div>
+    </div>
+
+    
+    </div>
+
+    
+    </div>
+
+                
     </div>
     </div>
     </div>
@@ -147,7 +157,7 @@
                             <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-primary"></i> Active speaker detection algorithms</li>
                         </ul>
                     </div>
-                    <div class="md:w-1/2 w-full h-80 glass rounded-2xl border border-white/10 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center bg-blend-overlay" data-aos="fade-left"></div>
+                    <div class="md:w-1/2 w-full h-80 glass rounded-2xl border border-white/10 flex items-center justify-center bg-cover bg-center bg-blend-overlay" style="background-image: url('assets/images/sfu.png');" data-aos="fade-left"></div>
                 </div>
 
                 <!-- Service Detailed 2 -->
@@ -162,7 +172,7 @@
                             <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-secondary"></i> Bandwidth limitation & auth mechanisms</li>
                         </ul>
                     </div>
-                    <div class="md:w-1/2 w-full h-80 glass rounded-2xl border border-white/10 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center bg-blend-overlay" data-aos="fade-right"></div>
+                    <div class="md:w-1/2 w-full h-80 glass rounded-2xl border border-white/10 flex items-center justify-center bg-cover bg-center bg-blend-overlay" style="background-image: url('assets/images/turn.png');" data-aos="fade-right"></div>
                 </div>
                 
                 <!-- Service Detailed 3 -->
@@ -177,7 +187,7 @@
                             <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-success"></i> Graceful error handling and reconnections</li>
                         </ul>
                     </div>
-                    <div class="md:w-1/2 w-full h-80 glass rounded-2xl border border-white/10 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1607799279861-4dddf9646b9a?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center bg-blend-overlay" data-aos="fade-left"></div>
+                    <div class="md:w-1/2 w-full h-80 glass rounded-2xl border border-white/10 flex items-center justify-center bg-cover bg-center bg-blend-overlay" style="background-image: url('assets/images/signaling.png');" data-aos="fade-left"></div>
                 </div>
             </section>
 
@@ -240,7 +250,7 @@
         <!-- Footer -->
     <footer class="bg-slate-900 border-t border-white/10 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xl neon-border">
@@ -275,6 +285,17 @@
                         <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
                     </ul>
                 </div>
+            
+                <div>
+                    <h4 class="text-white font-bold mb-6">Stay Connected</h4>
+                    <p class="text-gray-400 mb-4">Get cat updates and event news straight to your inbox.</p>
+                    <div class="flex items-center bg-white/5 border border-white/10 rounded-xl p-2">
+                        <input type="email" placeholder="Your email" class="w-full bg-transparent text-gray-300 placeholder:text-gray-500 focus:outline-none px-2">
+                        <button type="button" aria-label="Subscribe" class="w-10 h-10 rounded-lg bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -294,3 +315,6 @@
     <script src="assets/js/animations.js"></script>
 </body>
 </html>
+
+
+

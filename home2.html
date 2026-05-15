@@ -27,8 +27,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dark-mode.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
 </head>
-<body class="antialiased selection:bg-primary selection:text-white bg-dark text-gray-200">
+<body class="limited-text-palette antialiased selection:bg-primary selection:text-white bg-dark text-gray-200">
 
     <!-- Header (Same as index.html) -->
     <!-- Header -->
@@ -85,14 +86,14 @@
         </div>
     </header>
 
-                <!-- Mobile Menu Overlay -->
+    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-[60] bg-dark/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 xl:hidden flex flex-col">
         <div class="flex justify-end p-6">
             <button id="close-menu-btn" class="text-gray-400 hover:text-white">
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
-        <div class="flex flex-col items-center gap-6 px-4 py-8 overflow-y-auto">
+        <div class="flex flex-col items-center justify-start gap-6 px-4 py-8 overflow-y-auto flex-grow">
             <a href="index.html" class="text-2xl font-bold text-gray-300">Home 1</a>
             <a href="home2.html" class="text-2xl font-bold text-primary">Home 2</a>
             <a href="about.html" class="text-2xl font-bold text-gray-300">About</a>
@@ -100,12 +101,21 @@
             <a href="pricing.html" class="text-2xl font-bold text-gray-300">Pricing</a>
             <a href="blog.html" class="text-2xl font-bold text-gray-300">Blog</a>
             <a href="contact.html" class="text-2xl font-bold text-gray-300">Contact</a>
-            <a href="dashboard.html" class="text-2xl font-bold text-gray-300">Dashboard</a>
+            <a href="dashboard.html" class="text-2xl font-bold text-gray-300 mt-4 border-t border-white/10 pt-4 w-full text-center">Dashboard</a>
             
             <div class="flex gap-4 mt-8 w-full justify-center">
                 <a href="login.html" class="bg-gradient-to-r from-primary to-secondary text-white font-bold px-8 py-3 rounded-lg w-full max-w-xs text-center btn-glow">Login</a>
             </div>
         </div>
+    </div>
+
+    
+    </div>
+
+    
+    </div>
+
+                
     </div>
     </div>
     </div>
@@ -225,11 +235,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="glass p-8 rounded-2xl border border-white/5 relative">
                         <i class="fas fa-quote-right absolute top-6 right-6 text-4xl text-white/5"></i>
-                        <div class="flex text-warning text-sm mb-4">
+                        <div class="flex justify-center text-warning text-sm mb-4">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <p class="text-gray-300 mb-6 italic">"The custom Mediasoup SFU deployment reduced our AWS bandwidth costs by 40% while supporting 3x the concurrent users."</p>
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center justify-center gap-4">
                             <div class="w-12 h-12 bg-slate-700 rounded-full overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&auto=format&fit=crop" class="w-full h-full object-cover">
                             </div>
@@ -243,11 +253,11 @@
                     <!-- Add more testimonials similarly -->
                     <div class="glass p-8 rounded-2xl border border-primary/20 relative">
                         <i class="fas fa-quote-right absolute top-6 right-6 text-4xl text-white/5"></i>
-                        <div class="flex text-warning text-sm mb-4">
+                        <div class="flex justify-center text-warning text-sm mb-4">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <p class="text-gray-300 mb-6 italic">"The live analytics dashboard gave our support team the exact insights needed to troubleshoot dropped packets in real-time."</p>
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center justify-center gap-4">
                             <div class="w-12 h-12 bg-slate-700 rounded-full overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop" class="w-full h-full object-cover">
                             </div>
@@ -260,11 +270,11 @@
 
                     <div class="glass p-8 rounded-2xl border border-white/5 relative">
                         <i class="fas fa-quote-right absolute top-6 right-6 text-4xl text-white/5"></i>
-                        <div class="flex text-warning text-sm mb-4">
+                        <div class="flex justify-center text-warning text-sm mb-4">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <p class="text-gray-300 mb-6 italic">"Unmatched expertise in STUN/TURN server configuration. Our connection success rate jumped from 82% to 99.9%."</p>
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center justify-center gap-4">
                             <div class="w-12 h-12 bg-slate-700 rounded-full overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop" class="w-full h-full object-cover">
                             </div>
@@ -290,25 +300,25 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="glass p-6 rounded-2xl border border-white/5 text-center group hover:border-primary/50 transition-colors" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass p-6 rounded-2xl border border-white/5 text-center group hover:border-primary/50 transition-colors flex flex-col items-center h-full" data-aos="fade-up" data-aos-delay="100">
                         <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xl mx-auto mb-4 group-hover:scale-110 transition-transform"><i class="fas fa-map-marker-alt"></i></div>
                         <h4 class="text-white font-bold mb-1">US-East (Virginia)</h4>
-                        <p class="text-success font-mono text-sm">12ms avg RTT</p>
+                        <p class="text-success font-mono text-sm mt-auto">12ms avg RTT</p>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-white/5 text-center group hover:border-secondary/50 transition-colors" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass p-6 rounded-2xl border border-white/5 text-center group hover:border-secondary/50 transition-colors flex flex-col items-center h-full" data-aos="fade-up" data-aos-delay="200">
                         <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary text-xl mx-auto mb-4 group-hover:scale-110 transition-transform"><i class="fas fa-map-marker-alt"></i></div>
                         <h4 class="text-white font-bold mb-1">EU-Central (Frankfurt)</h4>
-                        <p class="text-success font-mono text-sm">18ms avg RTT</p>
+                        <p class="text-success font-mono text-sm mt-auto">18ms avg RTT</p>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-white/5 text-center group hover:border-primary/50 transition-colors" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass p-6 rounded-2xl border border-white/5 text-center group hover:border-primary/50 transition-colors flex flex-col items-center h-full" data-aos="fade-up" data-aos-delay="300">
                         <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xl mx-auto mb-4 group-hover:scale-110 transition-transform"><i class="fas fa-map-marker-alt"></i></div>
                         <h4 class="text-white font-bold mb-1">AP-South (Mumbai)</h4>
-                        <p class="text-warning font-mono text-sm">45ms avg RTT</p>
+                        <p class="text-warning font-mono text-sm mt-auto">45ms avg RTT</p>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-white/5 text-center group hover:border-secondary/50 transition-colors" data-aos="fade-up" data-aos-delay="400">
+                    <div class="glass p-6 rounded-2xl border border-white/5 text-center group hover:border-secondary/50 transition-colors flex flex-col items-center h-full" data-aos="fade-up" data-aos-delay="400">
                         <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary text-xl mx-auto mb-4 group-hover:scale-110 transition-transform"><i class="fas fa-map-marker-alt"></i></div>
                         <h4 class="text-white font-bold mb-1">AP-East (Tokyo)</h4>
-                        <p class="text-success font-mono text-sm">22ms avg RTT</p>
+                        <p class="text-success font-mono text-sm mt-auto">22ms avg RTT</p>
                     </div>
                 </div>
             </div>
@@ -440,7 +450,7 @@
         <!-- Footer -->
     <footer class="bg-slate-900 border-t border-white/10 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xl neon-border">
@@ -475,6 +485,17 @@
                         <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
                     </ul>
                 </div>
+            
+                <div>
+                    <h4 class="text-white font-bold mb-6">Stay Connected</h4>
+                    <p class="text-gray-400 mb-4">Get cat updates and event news straight to your inbox.</p>
+                    <div class="flex items-center bg-white/5 border border-white/10 rounded-xl p-2">
+                        <input type="email" placeholder="Your email" class="w-full bg-transparent text-gray-300 placeholder:text-gray-500 focus:outline-none px-2">
+                        <button type="button" aria-label="Subscribe" class="w-10 h-10 rounded-lg bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -494,3 +515,6 @@
     <script src="assets/js/animations.js"></script>
 </body>
 </html>
+
+
+

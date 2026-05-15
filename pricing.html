@@ -11,8 +11,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dark-mode.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
 </head>
-<body class="bg-dark text-gray-200">
+<body class="limited-text-palette bg-dark text-gray-200">
         <!-- Header -->
     <!-- Header -->
     <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
@@ -68,14 +69,14 @@
         </div>
     </header>
 
-                <!-- Mobile Menu Overlay -->
+    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-[60] bg-dark/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 xl:hidden flex flex-col">
         <div class="flex justify-end p-6">
             <button id="close-menu-btn" class="text-gray-400 hover:text-white">
                 <i class="fas fa-times text-2xl"></i>
             </button>
         </div>
-        <div class="flex flex-col items-center gap-6 px-4 py-8 overflow-y-auto">
+        <div class="flex flex-col items-center justify-start gap-6 px-4 py-8 overflow-y-auto flex-grow">
             <a href="index.html" class="text-2xl font-bold text-gray-300">Home 1</a>
             <a href="home2.html" class="text-2xl font-bold text-gray-300">Home 2</a>
             <a href="about.html" class="text-2xl font-bold text-gray-300">About</a>
@@ -83,12 +84,21 @@
             <a href="pricing.html" class="text-2xl font-bold text-primary">Pricing</a>
             <a href="blog.html" class="text-2xl font-bold text-gray-300">Blog</a>
             <a href="contact.html" class="text-2xl font-bold text-gray-300">Contact</a>
-            <a href="dashboard.html" class="text-2xl font-bold text-gray-300">Dashboard</a>
+            <a href="dashboard.html" class="text-2xl font-bold text-gray-300 mt-4 border-t border-white/10 pt-4 w-full text-center">Dashboard</a>
             
             <div class="flex gap-4 mt-8 w-full justify-center">
                 <a href="login.html" class="bg-gradient-to-r from-primary to-secondary text-white font-bold px-8 py-3 rounded-lg w-full max-w-xs text-center btn-glow">Login</a>
             </div>
         </div>
+    </div>
+
+    
+    </div>
+
+    
+    </div>
+
+                
     </div>
     </div>
     </div>
@@ -128,7 +138,7 @@
             <!-- Existing Pricing Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-24">
                 <!-- Tier 1 -->
-                <div class="glass-card p-8 rounded-3xl border border-white/5 flex flex-col hover:border-white/20 transition-all" data-aos="fade-up" data-aos-delay="100">
+                <div class="glass-card p-8 rounded-3xl border border-white/5 flex flex-col h-full hover:border-white/20 transition-all" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="text-xl font-bold text-white mb-2">Startup Audit</h3>
                     <p class="text-gray-400 text-sm mb-6 h-10">Perfect for identifying latency issues in existing apps.</p>
                     <div class="text-4xl font-bold text-white mb-6">$1,500 <span class="text-sm text-gray-500 font-normal">/ flat</span></div>
@@ -138,11 +148,11 @@
                         <li class="flex items-start gap-3"><i class="fas fa-check text-primary mt-1 text-sm"></i> <span class="text-gray-300 text-sm">STUN/TURN Assessment</span></li>
                         <li class="flex items-start gap-3"><i class="fas fa-check text-primary mt-1 text-sm"></i> <span class="text-gray-300 text-sm">Detailed Action Plan</span></li>
                     </ul>
-                    <a href="contact.html" class="w-full py-3 rounded-lg border border-white/10 text-center text-white hover:bg-white/5 transition-colors font-medium">Book Audit</a>
+                    <a href="contact.html" class="w-full py-3 rounded-lg border border-white/10 text-center text-white hover:bg-white/5 transition-colors font-medium mt-auto">Book Audit</a>
                 </div>
 
                 <!-- Tier 2 -->
-                <div class="glass-card p-8 rounded-3xl border border-primary/50 relative transform shadow-[0_0_30px_rgba(0,210,255,0.1)] flex flex-col neon-border md:-translate-y-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="glass-card p-8 rounded-3xl border border-primary/50 relative transform shadow-[0_0_30px_rgba(0,210,255,0.1)] flex flex-col h-full neon-border md:-translate-y-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="absolute top-0 right-8 transform -translate-y-1/2 bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold px-3 py-1 rounded-full">MOST POPULAR</div>
                     <h3 class="text-xl font-bold text-white mb-2">Custom Infrastructure</h3>
                     <p class="text-gray-400 text-sm mb-6 h-10">End-to-end development of SFU and routing logic.</p>
@@ -153,11 +163,11 @@
                         <li class="flex items-start gap-3"><i class="fas fa-check text-primary mt-1 text-sm"></i> <span class="text-gray-300 text-sm">Load balancing & Auto-scaling</span></li>
                         <li class="flex items-start gap-3"><i class="fas fa-check text-primary mt-1 text-sm"></i> <span class="text-gray-300 text-sm">Analytics Dashboard Integration</span></li>
                     </ul>
-                    <a href="contact.html" class="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-center text-white font-bold btn-glow">Start Project</a>
+                    <a href="contact.html" class="w-full py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-center text-white font-bold btn-glow mt-auto">Start Project</a>
                 </div>
 
                 <!-- Tier 3 -->
-                <div class="glass-card p-8 rounded-3xl border border-white/5 flex flex-col hover:border-white/20 transition-all" data-aos="fade-up" data-aos-delay="300">
+                <div class="glass-card p-8 rounded-3xl border border-white/5 flex flex-col h-full hover:border-white/20 transition-all" data-aos="fade-up" data-aos-delay="300">
                     <h3 class="text-xl font-bold text-white mb-2">Enterprise Retainer</h3>
                     <p class="text-gray-400 text-sm mb-6 h-10">Ongoing maintenance, scaling, and priority support.</p>
                     <div class="text-4xl font-bold text-white mb-6">$3,000 <span class="text-sm text-gray-500 font-normal">/ month</span></div>
@@ -167,7 +177,7 @@
                         <li class="flex items-start gap-3"><i class="fas fa-check text-primary mt-1 text-sm"></i> <span class="text-gray-300 text-sm">Proactive Latency Optimization</span></li>
                         <li class="flex items-start gap-3"><i class="fas fa-check text-primary mt-1 text-sm"></i> <span class="text-gray-300 text-sm">Dedicated Slack Channel</span></li>
                     </ul>
-                    <a href="contact.html" class="w-full py-3 rounded-lg border border-white/10 text-center text-white hover:bg-white/5 transition-colors font-medium">Contact Sales</a>
+                    <a href="contact.html" class="w-full py-3 rounded-lg border border-white/10 text-center text-white hover:bg-white/5 transition-colors font-medium mt-auto">Contact Sales</a>
                 </div>
             </div>
 
@@ -179,20 +189,20 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    <div class="glass p-6 rounded-2xl border border-white/5 text-center" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="glass p-6 rounded-2xl border border-white/5 text-center flex flex-col h-full" data-aos="zoom-in" data-aos-delay="100">
                         <i class="fas fa-code text-3xl text-primary mb-4"></i>
                         <h4 class="text-white font-bold mb-2">100% Code Ownership</h4>
-                        <p class="text-gray-400 text-sm">You receive full intellectual property rights and access to all source code written.</p>
+                        <p class="text-gray-400 text-sm mt-auto">You receive full intellectual property rights and access to all source code written.</p>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-white/5 text-center" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="glass p-6 rounded-2xl border border-white/5 text-center flex flex-col h-full" data-aos="zoom-in" data-aos-delay="200">
                         <i class="fas fa-book text-3xl text-success mb-4"></i>
                         <h4 class="text-white font-bold mb-2">Technical Documentation</h4>
-                        <p class="text-gray-400 text-sm">Comprehensive deployment manuals, API schemas, and architectural diagrams.</p>
+                        <p class="text-gray-400 text-sm mt-auto">Comprehensive deployment manuals, API schemas, and architectural diagrams.</p>
                     </div>
-                    <div class="glass p-6 rounded-2xl border border-white/5 text-center" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="glass p-6 rounded-2xl border border-white/5 text-center flex flex-col h-full" data-aos="zoom-in" data-aos-delay="300">
                         <i class="fab fa-docker text-3xl text-secondary mb-4"></i>
                         <h4 class="text-white font-bold mb-2">Containerized Deployments</h4>
-                        <p class="text-gray-400 text-sm">All services are delivered as production-ready Docker containers with Helm charts.</p>
+                        <p class="text-gray-400 text-sm mt-auto">All services are delivered as production-ready Docker containers with Helm charts.</p>
                     </div>
                 </div>
             </div>
@@ -203,23 +213,23 @@
                 <div class="max-w-4xl mx-auto px-8 text-center">
                     <h2 class="text-3xl font-bold text-white mb-8">The ROI of <span class="text-gradient">Custom Infrastructure</span></h2>
                     
-                    <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
-                        <div class="glass-card w-full md:w-1/2 p-8 rounded-2xl border border-red-500/20 relative">
+                    <div class="flex flex-col md:flex-row gap-8 justify-center items-stretch">
+                        <div class="glass-card w-full md:w-1/2 p-8 rounded-2xl border border-red-500/20 relative flex flex-col">
                             <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-times-circle text-6xl text-red-500"></i></div>
                             <h4 class="text-xl font-bold text-white mb-2">CPaaS / API Providers</h4>
                             <p class="text-gray-400 text-sm mb-4">(e.g., Twilio, Agora)</p>
                             <div class="text-3xl font-bold text-red-400 mb-6">~$4,000<span class="text-sm font-normal text-gray-500">/mo</span></div>
-                            <p class="text-gray-300 text-sm text-left">Based on 10,000 hours of video streaming. Costs scale linearly and aggressively with your user base.</p>
+                            <p class="text-gray-300 text-sm text-left mt-auto">Based on 10,000 hours of video streaming. Costs scale linearly and aggressively with your user base.</p>
                         </div>
                         
-                        <div class="hidden md:flex text-gray-500 text-3xl"><i class="fas fa-angle-double-right"></i></div>
+                        <div class="hidden md:flex text-gray-500 text-3xl items-center"><i class="fas fa-angle-double-right"></i></div>
                         
-                        <div class="glass-card w-full md:w-1/2 p-8 rounded-2xl border border-success/30 relative shadow-[0_0_20px_rgba(34,197,94,0.1)]">
+                        <div class="glass-card w-full md:w-1/2 p-8 rounded-2xl border border-success/30 relative shadow-[0_0_20px_rgba(34,197,94,0.1)] flex flex-col">
                             <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-check-circle text-6xl text-success"></i></div>
                             <h4 class="text-xl font-bold text-white mb-2">Self-Hosted SFU</h4>
                             <p class="text-gray-400 text-sm mb-4">(Your Custom Architecture)</p>
                             <div class="text-3xl font-bold text-success mb-6">~$300<span class="text-sm font-normal text-gray-500">/mo</span></div>
-                            <p class="text-gray-300 text-sm text-left">Based on raw DigitalOcean/AWS bandwidth costs for the same 10,000 hours. The infrastructure pays for itself in months.</p>
+                            <p class="text-gray-300 text-sm text-left mt-auto">Based on raw DigitalOcean/AWS bandwidth costs for the same 10,000 hours. The infrastructure pays for itself in months.</p>
                         </div>
                     </div>
                 </div>
@@ -269,7 +279,7 @@
         <!-- Footer -->
     <footer class="bg-slate-900 border-t border-white/10 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xl neon-border">
@@ -304,6 +314,17 @@
                         <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
                     </ul>
                 </div>
+            
+                <div>
+                    <h4 class="text-white font-bold mb-6">Stay Connected</h4>
+                    <p class="text-gray-400 mb-4">Get cat updates and event news straight to your inbox.</p>
+                    <div class="flex items-center bg-white/5 border border-white/10 rounded-xl p-2">
+                        <input type="email" placeholder="Your email" class="w-full bg-transparent text-gray-300 placeholder:text-gray-500 focus:outline-none px-2">
+                        <button type="button" aria-label="Subscribe" class="w-10 h-10 rounded-lg bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -323,3 +344,6 @@
     <script src="assets/js/animations.js"></script>
 </body>
 </html>
+
+
+
