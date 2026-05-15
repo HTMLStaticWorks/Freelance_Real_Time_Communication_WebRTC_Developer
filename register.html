@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Access | WebRTC Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#00D2FF', secondary: '#7C3AED', dark: '#0B1120' } } } }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dark-mode.css">
+</head>
+<body class="bg-dark text-gray-200 min-h-screen flex flex-col relative">
+    <!-- Background effects -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-[150px] mix-blend-screen pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] mix-blend-screen pointer-events-none"></div>
+
+    <!-- Header Actions -->
+    <header class="p-6 md:p-8 absolute top-0 left-0 w-full z-20 flex justify-end">
+        <div class="flex items-center gap-4">
+            <button id="theme-toggle" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg flex items-center justify-center">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button id="rtl-toggle" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg">
+                RTL
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4 relative z-10 py-10">
+        <div class="w-full max-w-md">
+            <div class="glass-card p-8 md:p-10 rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+                <!-- Brand in Card -->
+                <a href="index.html" class="flex items-center justify-center gap-3 mb-8 hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xl neon-border">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white dark-text-light" style="font-family: 'Space Grotesk', sans-serif;">RTC<span class="text-primary">Forge</span></span>
+                </a>
+
+                <div class="text-center mb-8">
+                    <h1 class="text-2xl font-bold text-white mb-2">Create Account</h1>
+                    <p class="text-sm text-gray-400">Join the waitlist for the WebRTC analytics platform</p>
+                </div>
+
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1.5">Full Name</label>
+                        <input type="text" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors h-[50px]" placeholder="John Doe">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1.5">Email Address</label>
+                        <input type="email" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors h-[50px]" placeholder="john@company.com">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1.5">Company Name</label>
+                        <input type="text" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors h-[50px]" placeholder="Acme Corp">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1.5">Password</label>
+                        <div class="relative">
+                            <input type="password" id="reg-password" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors pr-12 h-[50px]" placeholder="••••••••">
+                            <button type="button" onclick="togglePassword('reg-password')" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1.5">Confirm Password</label>
+                        <div class="relative">
+                            <input type="password" id="reg-confirm" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors pr-12 h-[50px]" placeholder="••••••••">
+                            <button type="button" onclick="togglePassword('reg-confirm')" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <label class="flex items-start gap-3 cursor-pointer text-sm text-gray-400 hover:text-gray-300">
+                            <input type="checkbox" class="rounded border-white/20 bg-black/30 text-primary focus:ring-primary/50 w-4 h-4 mt-0.5">
+                            <span>I agree to the <a href="#" class="text-primary hover:underline">Terms of Service</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a>.</span>
+                        </label>
+                    </div>
+                    
+                    <button type="button" class="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-3.5 rounded-xl text-lg btn-glow mt-2 h-[50px]">
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="mt-8 text-center text-sm text-gray-400">
+                    Already have an account? <a href="login.html" class="text-primary font-bold hover:underline">Sign In</a>
+                </div>
+
+                <div class="flex items-center gap-4 my-6">
+                    <div class="h-px bg-white/10 flex-grow"></div>
+                    <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold">Or</span>
+                    <div class="h-px bg-white/10 flex-grow"></div>
+                </div>
+
+                <!-- Social Logins -->
+                <div class="grid grid-cols-3 gap-3">
+                    <button class="flex items-center justify-center w-full bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white py-3 rounded-xl transition-all">
+                        <i class="fab fa-google text-lg"></i>
+                    </button>
+                    <button class="flex items-center justify-center w-full bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white py-3 rounded-xl transition-all">
+                        <i class="fab fa-facebook-f text-lg text-blue-500"></i>
+                    </button>
+                    <button class="flex items-center justify-center w-full bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white py-3 rounded-xl transition-all">
+                        <i class="fab fa-apple text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const icon = input.nextElementSibling.querySelector('i');
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>

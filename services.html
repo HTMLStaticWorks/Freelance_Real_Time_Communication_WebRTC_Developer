@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | WebRTC Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { colors: { primary: '#00D2FF', secondary: '#7C3AED', dark: '#0B1120', success: '#22C55E', warning: '#F59E0B' } }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dark-mode.css">
+</head>
+<body class="bg-dark text-gray-200">
+        <!-- Header -->
+    <!-- Header -->
+    <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xl neon-border">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white dark-text-light" style="font-family: 'Space Grotesk', sans-serif;">RTC<span class="text-primary">Forge</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden xl:flex space-x-8 desktop-menu items-center">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home 1</a>
+                    <a href="home2.html" class="text-gray-300 hover:text-white transition-colors">Home 2</a>
+                    <a href="about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="services.html" class="text-primary font-medium hover:text-primary transition-colors">Services</a>
+                    <a href="pricing.html" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="blog.html" class="text-gray-300 hover:text-white transition-colors">Blog</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                </nav>
+
+                <!-- Right Side Actions -->
+                <div class="hidden xl:flex items-center space-x-4">
+                    <a href="dashboard.html" title="Dashboard" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                    <button id="theme-toggle" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <button id="rtl-toggle" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg">
+                        RTL
+                    </button>
+                    <a href="login.html" class="text-gray-300 hover:text-white transition-colors glass px-6 py-2 rounded-lg font-medium">Login</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="xl:hidden flex items-center gap-4">
+                    
+                    <button id="mobile-rtl-toggle" class="text-gray-300 hover:text-white text-xs font-bold glass px-2 py-1 rounded">
+                        RTL
+                    </button>
+                    <button id="mobile-theme-toggle" class="text-gray-300 hover:text-white w-8 h-8 rounded-full glass flex items-center justify-center">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+                <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-dark/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 xl:hidden flex flex-col">
+        <div class="flex justify-end p-6">
+            <button id="close-menu-btn" class="text-gray-400 hover:text-white">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center gap-6 px-4 py-8 overflow-y-auto">
+            <a href="index.html" class="text-2xl font-bold text-gray-300">Home 1</a>
+            <a href="home2.html" class="text-2xl font-bold text-gray-300">Home 2</a>
+            <a href="about.html" class="text-2xl font-bold text-gray-300">About</a>
+            <a href="services.html" class="text-2xl font-bold text-primary">Services</a>
+            <a href="pricing.html" class="text-2xl font-bold text-gray-300">Pricing</a>
+            <a href="blog.html" class="text-2xl font-bold text-gray-300">Blog</a>
+            <a href="contact.html" class="text-2xl font-bold text-gray-300">Contact</a>
+            <a href="dashboard.html" class="text-2xl font-bold text-gray-300">Dashboard</a>
+            
+            <div class="flex gap-4 mt-8 w-full justify-center">
+                <a href="login.html" class="bg-gradient-to-r from-primary to-secondary text-white font-bold px-8 py-3 rounded-lg w-full max-w-xs text-center btn-glow">Login</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <main class="pt-32 pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero Section (About Format) -->
+            <section class="mb-24 overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div data-aos="fade-right" class="text-center lg:text-left">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">Engineering <span class="text-primary">Solutions</span></h1>
+                        <p class="text-lg text-gray-400 mb-6 leading-relaxed">
+                            Comprehensive WebRTC infrastructure development. I specialize in turning complex real-time communication requirements into robust, deployable architectures.
+                        </p>
+                        <p class="text-lg text-gray-400 mb-8 leading-relaxed">
+                            From custom signaling protocols to highly available SFU topologies, my solutions are designed to scale effortlessly while maintaining sub-second latency.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-6 mb-8 max-w-md mx-auto lg:mx-0">
+                            <div class="glass p-4 rounded-xl border border-white/5 hover:border-primary/50 transition-colors">
+                                <div class="text-3xl font-bold text-white mb-1"><i class="fas fa-server text-primary"></i></div>
+                                <div class="text-sm text-gray-400">Custom SFUs</div>
+                            </div>
+                            <div class="glass p-4 rounded-xl border border-white/5 hover:border-secondary/50 transition-colors">
+                                <div class="text-3xl font-bold text-white mb-1"><i class="fas fa-shield-alt text-secondary"></i></div>
+                                <div class="text-sm text-gray-400">Enterprise Security</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card rounded-3xl p-2 border border-white/10 relative" data-aos="fade-left">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl blur-xl -z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Server Infrastructure" class="rounded-2xl w-full h-auto max-h-[500px] object-cover opacity-80">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Existing Services List -->
+            <section class="space-y-8 mb-24 overflow-hidden">
+                <!-- Service Detailed 1 -->
+                <div class="glass-card p-8 md:p-12 rounded-3xl border border-white/5 flex flex-col md:flex-row gap-10 items-center">
+                    <div class="md:w-1/2 text-center lg:text-left" data-aos="fade-right">
+                        <div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary text-3xl mb-6 mx-auto lg:mx-0"><i class="fas fa-server"></i></div>
+                        <h2 class="text-3xl font-bold text-white mb-4">SFU Development & Scaling</h2>
+                        <p class="text-gray-400 mb-6 leading-relaxed">We architect and deploy custom Selective Forwarding Units (SFUs) using Mediasoup or Janus. Ideal for applications requiring large multi-party video rooms without overloading client devices.</p>
+                        <ul class="space-y-3 mb-8 inline-block lg:block text-left">
+                            <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-primary"></i> Horizontal scaling across worker nodes</li>
+                            <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-primary"></i> Simulcast & Adaptive Bitrate (ABR)</li>
+                            <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-primary"></i> Active speaker detection algorithms</li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 w-full h-80 glass rounded-2xl border border-white/10 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center bg-blend-overlay" data-aos="fade-left"></div>
+                </div>
+
+                <!-- Service Detailed 2 -->
+                <div class="glass-card p-8 md:p-12 rounded-3xl border border-white/5 flex flex-col md:flex-row-reverse gap-10 items-center">
+                    <div class="md:w-1/2 text-center lg:text-left" data-aos="fade-left">
+                        <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary text-3xl mb-6 mx-auto lg:mx-0"><i class="fas fa-route"></i></div>
+                        <h2 class="text-3xl font-bold text-white mb-4">TURN/STUN Deployment</h2>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Ensure your calls never fail due to strict corporate firewalls or symmetric NATs. We deploy globally distributed coTURN clusters to guarantee 99.9% connectivity.</p>
+                        <ul class="space-y-3 mb-8 inline-block lg:block text-left">
+                            <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-secondary"></i> Global edge routing</li>
+                            <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-secondary"></i> Secure TLS/DTLS encryption</li>
+                            <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-secondary"></i> Bandwidth limitation & auth mechanisms</li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 w-full h-80 glass rounded-2xl border border-white/10 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center bg-blend-overlay" data-aos="fade-right"></div>
+                </div>
+                
+                <!-- Service Detailed 3 -->
+                <div class="glass-card p-8 md:p-12 rounded-3xl border border-white/5 flex flex-col md:flex-row gap-10 items-center">
+                    <div class="md:w-1/2 text-center lg:text-left" data-aos="fade-right">
+                        <div class="w-16 h-16 rounded-2xl bg-success/10 flex items-center justify-center text-success text-3xl mb-6 mx-auto lg:mx-0"><i class="fas fa-project-diagram"></i></div>
+                        <h2 class="text-3xl font-bold text-white mb-4">Custom Signaling Servers</h2>
+                        <p class="text-gray-400 mb-6 leading-relaxed">WebRTC doesn't dictate how you establish connections. I build extremely fast, bespoke WebSocket and gRPC signaling layers tailored strictly to your application's logic.</p>
+                        <ul class="space-y-3 mb-8 inline-block lg:block text-left">
+                            <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-success"></i> Highly concurrent Node.js / Rust backends</li>
+                            <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-success"></i> Redis Pub/Sub for multi-server scaling</li>
+                            <li class="flex items-center gap-3 text-gray-300"><i class="fas fa-check text-success"></i> Graceful error handling and reconnections</li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 w-full h-80 glass rounded-2xl border border-white/10 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1607799279861-4dddf9646b9a?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center bg-blend-overlay" data-aos="fade-left"></div>
+                </div>
+            </section>
+
+            <!-- NEW SECTION 2: ENGAGEMENT PROCESS -->
+            <section class="py-16 mb-24 relative overflow-hidden">
+                <div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full -z-10"></div>
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white">The <span class="text-secondary">Process</span></h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">How we move from a complex problem to a scalable WebRTC deployment in 4 distinct phases.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                    <!-- Connecting line for desktop -->
+                    <div class="hidden md:block absolute top-12 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-primary via-secondary to-success z-0"></div>
+
+                    <div class="relative z-10 text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-24 h-24 mx-auto bg-slate-900 border-4 border-primary rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 shadow-[0_0_20px_rgba(0,210,255,0.4)]">01</div>
+                        <h4 class="text-xl font-bold text-white mb-3">Discovery</h4>
+                        <p class="text-gray-400 text-sm">Analyzing your specific latency requirements, target audience, and scale expectations.</p>
+                    </div>
+                    <div class="relative z-10 text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-24 h-24 mx-auto bg-slate-900 border-4 border-secondary rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 shadow-[0_0_20px_rgba(124,58,237,0.4)]">02</div>
+                        <h4 class="text-xl font-bold text-white mb-3">Architecture</h4>
+                        <p class="text-gray-400 text-sm">Designing the SFU topology, choosing the right signaling protocol, and mapping server regions.</p>
+                    </div>
+                    <div class="relative z-10 text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-24 h-24 mx-auto bg-slate-900 border-4 border-success rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 shadow-[0_0_20px_rgba(34,197,94,0.4)]">03</div>
+                        <h4 class="text-xl font-bold text-white mb-3">Implementation</h4>
+                        <p class="text-gray-400 text-sm">Writing the core backend logic, setting up TURN servers, and configuring DTLS encryption.</p>
+                    </div>
+                    <div class="relative z-10 text-center" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-24 h-24 mx-auto bg-slate-900 border-4 border-warning rounded-full flex items-center justify-center text-2xl font-bold text-white mb-6 shadow-[0_0_20px_rgba(245,158,11,0.4)]">04</div>
+                        <h4 class="text-xl font-bold text-white mb-3">Scaling</h4>
+                        <p class="text-gray-400 text-sm">Deploying via Docker/Kubernetes and implementing load balancers to ensure seamless horizontal scaling.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW SECTION 3: CALL TO ACTION -->
+            <div class="glass-card rounded-3xl p-10 md:p-16 border border-primary/30 relative overflow-hidden text-center" data-aos="zoom-in">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-luminosity"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 blur-[150px] rounded-full"></div>
+                
+                <div class="relative z-10 max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">Ready to Build the <span class="text-primary">Future?</span></h2>
+                    <p class="text-xl text-gray-300 mb-10">Stop struggling with buffering and high latency. Let's engineer a real-time system that actually works at scale.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="contact.html" class="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-xl font-bold text-lg btn-glow hover:scale-105 transition-transform flex items-center justify-center gap-3">
+                            <i class="fas fa-rocket"></i> Start a Project
+                        </a>
+                        <a href="pricing.html" class="glass text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-3">
+                            View Pricing Models
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+        <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-white/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xl neon-border">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-white dark-text-light" style="font-family: 'Space Grotesk', sans-serif;">RTC<span class="text-primary">Forge</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-sm">Premium freelance WebRTC engineering and SaaS analytics for enterprise real-time communication platforms.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-white/10 transition-all"><i class="fab fa-github"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-secondary hover:bg-white/10 transition-all"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-white/10 transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition-colors">SFU Development</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition-colors">TURN/STUN Deployment</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition-colors">WebSocket Signaling</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition-colors">Live Dashboards</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">About Me</a></li>
+                        <li><a href="pricing.html" class="text-gray-400 hover:text-primary transition-colors">Pricing</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-primary transition-colors">Engineering Blog</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2026 RTCForge Engineering. All rights reserved.</p>
+                <div class="flex space-x-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/animations.js"></script>
+</body>
+</html>

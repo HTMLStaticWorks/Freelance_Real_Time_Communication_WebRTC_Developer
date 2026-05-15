@@ -1,0 +1,59 @@
+/* assets/css/dark-mode.css */
+body.light-mode {
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+body.light-mode .glass {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .glass-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.8));
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .text-gray-400 {
+    color: #475569 !important;
+}
+
+body.light-mode .text-gray-300 {
+    color: #334155 !important;
+}
+
+body.light-mode h1, 
+body.light-mode h2, 
+body.light-mode h3, 
+body.light-mode h4, 
+body.light-mode h5, 
+body.light-mode h6 {
+    color: #0f172a !important;
+}
+
+body.light-mode .bg-slate-800,
+body.light-mode .bg-slate-900 {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+body.light-mode input, body.light-mode textarea {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    border-color: #cbd5e1;
+}
+
+body.light-mode .border-slate-800 {
+    border-color: #e2e8f0 !important;
+}
+
+body.light-mode .text-white {
+    color: #0f172a !important;
+}
+
+/* Footer Link Hover in Light Mode */
+body.light-mode footer a:hover {
+    color: #00D2FF !important;
+}
+

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Connection Lost | WebRTC Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#00D2FF', secondary: '#7C3AED', dark: '#0B1120', danger: '#EF4444' } } } }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dark-mode.css">
+</head>
+<body class="bg-dark text-gray-200 min-h-screen flex items-center justify-center relative overflow-hidden">
+    
+    <!-- Animated Network Background -->
+    <div class="absolute inset-0 z-0">
+        <svg class="w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#EF4444;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#00D2FF;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <!-- Broken network lines -->
+            <path d="M 100 100 L 300 300 M 500 200 L 700 500 M 800 100 L 900 300" stroke="url(#grad)" stroke-width="2" stroke-dasharray="10, 10" class="animate-pulse" />
+        </svg>
+    </div>
+
+    <!-- Floating disconnected nodes -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-12 h-12 rounded-full border-2 border-danger flex items-center justify-center glass animate-[bounce_3s_infinite]">
+            <i class="fas fa-times text-danger"></i>
+        </div>
+        <div class="absolute bottom-1/3 right-1/4 w-16 h-16 rounded-full border-2 border-primary/50 flex items-center justify-center glass animate-[bounce_4s_infinite_reverse]">
+            <i class="fas fa-question text-primary/50"></i>
+        </div>
+    </div>
+
+        <!-- Header -->
+    <!-- Header -->
+    <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xl neon-border">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-white dark-text-light" style="font-family: 'Space Grotesk', sans-serif;">RTC<span class="text-primary">Forge</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden lg:flex space-x-8 desktop-menu items-center">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home 1</a>
+                    <a href="home2.html" class="text-gray-300 hover:text-white transition-colors">Home 2</a>
+                    <a href="about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="services.html" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="pricing.html" class="text-gray-300 hover:text-white transition-colors">Pricing</a>
+                    <a href="blog.html" class="text-gray-300 hover:text-white transition-colors">Blog</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                </nav>
+
+                <!-- Right Side Actions -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="dashboard.html" title="Dashboard" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                    <button id="theme-toggle" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <button id="rtl-toggle" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg">
+                        RTL
+                    </button>
+                    <a href="login.html" class="text-gray-300 hover:text-white transition-colors glass px-6 py-2 rounded-lg font-medium">Login</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center gap-4">
+                    <button id="mobile-rtl-toggle" class="text-gray-300 hover:text-white text-xs font-bold glass px-2 py-1 rounded">
+                        RTL
+                    </button>
+                    <button id="mobile-theme-toggle" class="text-gray-300 hover:text-white w-8 h-8 rounded-full glass flex items-center justify-center">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 text-center px-4 max-w-2xl">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-danger/30 text-danger text-sm font-medium mb-8">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-danger opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-danger"></span>
+            </span>
+            Error 404: Node Unreachable
+        </div>
+
+        <h1 class="text-6xl md:text-8xl font-bold mb-6 text-white font-mono">
+            Connection <span class="text-danger">Lost</span>
+        </h1>
+        
+        <p class="text-xl text-gray-400 mb-10 font-mono">
+            > The signaling server could not route your request.<br>
+            > ICE candidate gathering failed.<br>
+            > Peer connection disconnected.
+        </p>
+
+        <a href="index.html" class="bg-gradient-to-r from-primary to-secondary text-white font-bold px-8 py-4 rounded-xl text-lg btn-glow inline-flex items-center gap-3">
+            <i class="fas fa-sync-alt animate-spin-slow"></i> Reconnect to Hub
+        </a>
+    </main>
+
+    <style>
+        .animate-spin-slow {
+            animation: spin 3s linear infinite;
+        }
+    </style>
+    <script src="assets/js/main.js"></script>
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-white/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xl neon-border">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <span class="font-bold text-xl tracking-tight text-white dark-text-light" style="font-family: 'Space Grotesk', sans-serif;">RTC<span class="text-primary">Forge</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-sm">Premium freelance WebRTC engineering and SaaS analytics for enterprise real-time communication platforms.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-white/10 transition-all"><i class="fab fa-github"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-secondary hover:bg-white/10 transition-all"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-white/10 transition-all"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition-colors">SFU Development</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition-colors">TURN/STUN Deployment</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition-colors">WebSocket Signaling</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-primary transition-colors">Live Dashboards</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition-colors">About Me</a></li>
+                        <li><a href="pricing.html" class="text-gray-400 hover:text-primary transition-colors">Pricing</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-primary transition-colors">Engineering Blog</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2026 RTCForge Engineering. All rights reserved.</p>
+                <div class="flex space-x-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

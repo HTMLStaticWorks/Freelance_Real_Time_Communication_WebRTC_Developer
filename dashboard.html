@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Dashboard | WebRTC Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { colors: { primary: '#00D2FF', secondary: '#7C3AED', dark: '#0B1120', success: '#22C55E', warning: '#F59E0B', danger: '#EF4444' } }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/dark-mode.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-dark text-gray-200 overflow-hidden flex h-screen">
+    
+    <!-- Sidebar Overlay for mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden transition-opacity duration-300"></div>
+
+    <!-- Sidebar -->
+    <aside id="dashboard-sidebar" class="w-64 bg-slate-900 border-r border-white/5 flex flex-col fixed inset-y-0 left-0 z-50 transform -translate-x-full transition-transform duration-300 lg:relative lg:translate-x-0 lg:flex h-full">
+        <div class="h-20 flex items-center justify-between px-6 border-b border-white/5">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <div class="w-8 h-8 rounded bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-sm"><i class="fas fa-network-wired"></i></div>
+                <span class="font-bold text-lg text-white" style="font-family: 'Space Grotesk', sans-serif;">RTC<span class="text-primary">Forge</span></span>
+            </a>
+            <button id="close-sidebar" class="lg:hidden text-gray-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-4 flex-grow overflow-y-auto">
+            <div class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-4 px-3">Main Menu</div>
+            <nav class="space-y-1" id="main-nav">
+                <a href="#" data-section="overview" onclick="switchSection('overview', event)" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-medium border border-primary/20"><i class="fas fa-chart-pie w-5"></i> Overview</a>
+                <a href="#" data-section="sessions" onclick="switchSection('sessions', event)" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"><i class="fas fa-video w-5"></i> Sessions</a>
+                <a href="#" data-section="monitoring" onclick="switchSection('monitoring', event)" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"><i class="fas fa-server w-5"></i> Monitoring</a>
+                <a href="#" data-section="analytics" onclick="switchSection('analytics', event)" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"><i class="fas fa-globe w-5"></i> Analytics</a>
+                <a href="#" data-section="ice-logs" onclick="switchSection('ice-logs', event)" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"><i class="fas fa-terminal w-5"></i> ICE Logs</a>
+            </nav>
+            
+            <div class="text-xs text-gray-500 font-bold uppercase tracking-wider mt-8 mb-4 px-3">System</div>
+            <nav class="space-y-1" id="system-nav">
+                <a href="#" data-section="settings" onclick="switchSection('settings', event)" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition-colors"><i class="fas fa-cog w-5"></i> Settings</a>
+                <a href="login.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-danger/10 hover:text-danger transition-colors"><i class="fas fa-sign-out-alt w-5"></i> Logout</a>
+            </nav>
+        </div>
+        
+        <div class="p-4 border-t border-white/5">
+            <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full border border-white/10">
+                <div>
+                    <div class="text-sm text-white font-medium">Admin User</div>
+                    <div class="text-xs text-gray-500">admin@rtcforge.com</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        <!-- Topbar -->
+        <header class="h-20 bg-slate-900/50 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-6">
+            <div class="flex items-center gap-4">
+                <button id="dashboard-menu-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none mr-2"><i class="fas fa-bars text-xl"></i></button>
+                
+                <!-- Brand for Mobile (Hidden) -->
+                <a href="index.html" class="hidden flex items-center gap-2 hover:opacity-80 transition-opacity">
+                    <div class="w-8 h-8 rounded bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-white font-bold text-xs"><i class="fas fa-network-wired"></i></div>
+                    <span class="font-bold text-base text-white" style="font-family: 'Space Grotesk', sans-serif;">RTC<span class="text-primary">Forge</span></span>
+                </a>
+
+                <h1 class="text-xl font-bold text-white hidden lg:block">Real-Time Analytics</h1>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button id="rtl-toggle" class="text-gray-300 hover:text-white transition-colors text-sm font-bold glass px-3 py-2 rounded-lg">
+                    RTL
+                </button>
+                <div class="glass px-3 py-1.5 rounded-full text-xs font-bold text-success flex items-center gap-2 border border-success/30 ml-2">
+                    <div class="w-2 h-2 rounded-full bg-success animate-pulse"></div> Live
+                </div>
+                <button class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white"><i class="fas fa-bell"></i></button>
+            </div>
+        </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-dark/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 lg:hidden flex flex-col">
+        <div class="flex justify-end p-6">
+            <button id="close-menu-btn" class="text-gray-400 hover:text-white">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center gap-6 px-4 py-8 overflow-y-auto">
+            <a href="index.html" class="text-2xl font-bold text-gray-300">Home 1</a>
+            <a href="home2.html" class="text-2xl font-bold text-gray-300">Home 2</a>
+            <a href="about.html" class="text-2xl font-bold text-gray-300">About</a>
+            <a href="services.html" class="text-2xl font-bold text-gray-300">Services</a>
+            <a href="pricing.html" class="text-2xl font-bold text-gray-300">Pricing</a>
+            <a href="blog.html" class="text-2xl font-bold text-gray-300">Blog</a>
+            <a href="contact.html" class="text-2xl font-bold text-gray-300">Contact</a>
+            
+            <div class="flex gap-4 mt-8 w-full justify-center">
+                <a href="login.html" class="bg-gradient-to-r from-primary to-secondary text-white font-bold px-8 py-3 rounded-lg w-full max-w-xs text-center btn-glow">Login</a>
+            </div>
+        </div>
+    </div>
+
+        <!-- Dashboard Content -->
+        <main class="flex-1 overflow-y-auto p-6 bg-dark relative">
+            <!-- Overview Section -->
+            <div id="section-overview" class="dashboard-section block">
+                <!-- Stats Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="glass-card p-5 rounded-xl border border-white/5">
+                    <div class="text-gray-400 text-sm font-medium mb-1 flex justify-between">Active Sessions <i class="fas fa-video text-primary"></i></div>
+                    <div class="text-3xl font-bold text-white">1,284</div>
+                    <div class="text-xs text-success mt-2 flex items-center gap-1"><i class="fas fa-arrow-up"></i> 12% vs last hour</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl border border-white/5">
+                    <div class="text-gray-400 text-sm font-medium mb-1 flex justify-between">Global Packet Loss <i class="fas fa-network-wired text-secondary"></i></div>
+                    <div class="text-3xl font-bold text-white">0.14%</div>
+                    <div class="text-xs text-danger mt-2 flex items-center gap-1"><i class="fas fa-arrow-up"></i> 0.02% vs last hour</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl border border-white/5">
+                    <div class="text-gray-400 text-sm font-medium mb-1 flex justify-between">TURN Relay Usage <i class="fas fa-route text-warning"></i></div>
+                    <div class="text-3xl font-bold text-white">18.5%</div>
+                    <div class="text-xs text-success mt-2 flex items-center gap-1"><i class="fas fa-arrow-down"></i> 2% vs last hour</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl border border-white/5">
+                    <div class="text-gray-400 text-sm font-medium mb-1 flex justify-between">SFU Node Health <i class="fas fa-server text-success"></i></div>
+                    <div class="text-3xl font-bold text-white">99.9%</div>
+                    <div class="text-xs text-gray-500 mt-2 flex items-center gap-1">All 12 nodes operational</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <div class="lg:col-span-2 glass-card p-5 rounded-xl border border-white/5 flex flex-col">
+                    <h3 class="text-white font-bold mb-4">Average RTT (Latency)</h3>
+                    <div class="flex-grow min-h-[300px] relative">
+                        <canvas id="mainLatencyChart"></canvas>
+                    </div>
+                </div>
+                <div class="glass-card p-5 rounded-xl border border-white/5 flex flex-col">
+                    <h3 class="text-white font-bold mb-4">Connection Types</h3>
+                    <div class="flex-grow min-h-[300px] relative flex items-center justify-center">
+                        <canvas id="connTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs / Table -->
+            <div class="glass-card rounded-xl border border-white/5 overflow-hidden">
+                <div class="p-5 border-b border-white/5 flex justify-between items-center">
+                    <h3 class="text-white font-bold">Recent ICE Candidate Logs</h3>
+                    <button class="text-xs bg-white/5 hover:bg-white/10 text-white px-3 py-1 rounded border border-white/10 transition">Export</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-white/5 text-gray-400 text-xs uppercase tracking-wider">
+                                <th class="p-4 font-medium">Session ID</th>
+                                <th class="p-4 font-medium">Candidate Type</th>
+                                <th class="p-4 font-medium">Protocol</th>
+                                <th class="p-4 font-medium">Region</th>
+                                <th class="p-4 font-medium">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm text-gray-300 divide-y divide-white/5">
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="p-4 font-mono text-xs">sess_8f92a1</td>
+                                <td class="p-4"><span class="bg-primary/20 text-primary px-2 py-0.5 rounded text-xs">host</span></td>
+                                <td class="p-4">UDP</td>
+                                <td class="p-4">US-East</td>
+                                <td class="p-4 text-success"><i class="fas fa-check-circle"></i> Connected</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="p-4 font-mono text-xs">sess_b47c00</td>
+                                <td class="p-4"><span class="bg-warning/20 text-warning px-2 py-0.5 rounded text-xs">relay</span></td>
+                                <td class="p-4">TCP</td>
+                                <td class="p-4">EU-West</td>
+                                <td class="p-4 text-success"><i class="fas fa-check-circle"></i> Connected</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="p-4 font-mono text-xs">sess_1e39b2</td>
+                                <td class="p-4"><span class="bg-secondary/20 text-secondary px-2 py-0.5 rounded text-xs">srflx</span></td>
+                                <td class="p-4">UDP</td>
+                                <td class="p-4">AP-South</td>
+                                <td class="p-4 text-danger"><i class="fas fa-times-circle"></i> Timeout</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div> <!-- End Overview Section -->
+
+            <!-- Sessions Section -->
+            <div id="section-sessions" class="dashboard-section hidden space-y-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-white">Active Sessions</h2>
+                    <div class="flex gap-2">
+                        <button class="bg-primary/20 text-primary px-4 py-2 rounded-lg text-sm font-medium border border-primary/30 hover:bg-primary/30 transition"><i class="fas fa-filter mr-2"></i> Filter</button>
+                        <button class="bg-white/5 text-white px-4 py-2 rounded-lg text-sm font-medium border border-white/10 hover:bg-white/10 transition"><i class="fas fa-download mr-2"></i> Export</button>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl border border-white/5 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-white/5 text-gray-400 text-xs uppercase tracking-wider">
+                                    <th class="p-4 font-medium">Room ID</th>
+                                    <th class="p-4 font-medium">Participants</th>
+                                    <th class="p-4 font-medium">Duration</th>
+                                    <th class="p-4 font-medium">Bandwidth</th>
+                                    <th class="p-4 font-medium">Status</th>
+                                    <th class="p-4 font-medium">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm text-gray-300 divide-y divide-white/5">
+                                <tr class="hover:bg-white/5 transition">
+                                    <td class="p-4 font-mono text-xs text-primary">room_alpha_92</td>
+                                    <td class="p-4">12 / 50</td>
+                                    <td class="p-4">45m 12s</td>
+                                    <td class="p-4">4.2 Mbps</td>
+                                    <td class="p-4"><span class="bg-success/20 text-success px-2 py-1 rounded text-xs"><i class="fas fa-circle text-[8px] mr-1"></i> Active</span></td>
+                                    <td class="p-4"><button class="text-gray-400 hover:text-white"><i class="fas fa-ellipsis-v"></i></button></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition">
+                                    <td class="p-4 font-mono text-xs text-primary">room_beta_04</td>
+                                    <td class="p-4">4 / 10</td>
+                                    <td class="p-4">1h 20m</td>
+                                    <td class="p-4">1.5 Mbps</td>
+                                    <td class="p-4"><span class="bg-success/20 text-success px-2 py-1 rounded text-xs"><i class="fas fa-circle text-[8px] mr-1"></i> Active</span></td>
+                                    <td class="p-4"><button class="text-gray-400 hover:text-white"><i class="fas fa-ellipsis-v"></i></button></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition">
+                                    <td class="p-4 font-mono text-xs text-primary">room_gamma_77</td>
+                                    <td class="p-4">2 / 2</td>
+                                    <td class="p-4">5m 30s</td>
+                                    <td class="p-4">0.8 Mbps</td>
+                                    <td class="p-4"><span class="bg-warning/20 text-warning px-2 py-1 rounded text-xs"><i class="fas fa-circle text-[8px] mr-1"></i> Poor Conn</span></td>
+                                    <td class="p-4"><button class="text-gray-400 hover:text-white"><i class="fas fa-ellipsis-v"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- End Sessions Section -->
+
+            <!-- Monitoring Section -->
+            <div id="section-monitoring" class="dashboard-section hidden space-y-6">
+                <h2 class="text-2xl font-bold text-white mb-4">System Monitoring</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-xl border border-white/5">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-gray-400 font-medium">CPU Usage</h3>
+                            <i class="fas fa-microchip text-primary"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-white mb-2">42%</div>
+                        <div class="w-full bg-white/10 rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 42%"></div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl border border-white/5">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-gray-400 font-medium">Memory</h3>
+                            <i class="fas fa-memory text-secondary"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-white mb-2">16.4 GB <span class="text-sm text-gray-500 font-normal">/ 32 GB</span></div>
+                        <div class="w-full bg-white/10 rounded-full h-2">
+                            <div class="bg-secondary h-2 rounded-full" style="width: 51%"></div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 rounded-xl border border-white/5">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-gray-400 font-medium">Network I/O</h3>
+                            <i class="fas fa-network-wired text-success"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-white mb-2">850 Mbps</div>
+                        <div class="text-sm text-gray-400 flex justify-between">
+                            <span><i class="fas fa-arrow-down text-success"></i> 420 Mbps</span>
+                            <span><i class="fas fa-arrow-up text-primary"></i> 430 Mbps</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl border border-white/5 mt-6">
+                    <h3 class="text-white font-bold mb-4">SFU Node Cluster Status</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center text-success"><i class="fas fa-server"></i></div>
+                                <div>
+                                    <div class="text-white font-medium">Node-US-East-1</div>
+                                    <div class="text-xs text-gray-400">10.0.0.14</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-success text-sm font-medium">Healthy</div>
+                                <div class="text-xs text-gray-400">Uptime: 45d 12h</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/5">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-success/20 flex items-center justify-center text-success"><i class="fas fa-server"></i></div>
+                                <div>
+                                    <div class="text-white font-medium">Node-EU-West-2</div>
+                                    <div class="text-xs text-gray-400">10.0.0.22</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-success text-sm font-medium">Healthy</div>
+                                <div class="text-xs text-gray-400">Uptime: 12d 4h</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-warning/30">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-warning/20 flex items-center justify-center text-warning"><i class="fas fa-server"></i></div>
+                                <div>
+                                    <div class="text-white font-medium">Node-AP-South-1</div>
+                                    <div class="text-xs text-gray-400">10.0.0.45</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-warning text-sm font-medium">High Load</div>
+                                <div class="text-xs text-gray-400">CPU: 89%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Monitoring Section -->
+
+            <!-- Analytics Section -->
+            <div id="section-analytics" class="dashboard-section hidden space-y-6">
+                <h2 class="text-2xl font-bold text-white mb-4">Advanced Analytics</h2>
+                <div class="glass-card p-6 rounded-xl border border-white/5 h-80 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Detailed Metrics Dashboard</h3>
+                    <p class="text-gray-400 max-w-md mx-auto">Access comprehensive usage reports, participant retention graphs, and historical bandwidth utilization.</p>
+                    <button class="mt-6 bg-primary text-dark font-bold px-6 py-2 rounded-lg hover:bg-primary/90 transition">Generate Report</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                     <div class="glass-card p-5 rounded-xl border border-white/5 flex flex-col justify-center">
+                        <h3 class="text-white font-bold mb-4">Traffic by Region</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-gray-300">North America</span><span class="text-white font-bold">45%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-1.5"><div class="bg-primary h-1.5 rounded-full" style="width: 45%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-gray-300">Europe</span><span class="text-white font-bold">30%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-1.5"><div class="bg-secondary h-1.5 rounded-full" style="width: 30%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-gray-300">Asia Pacific</span><span class="text-white font-bold">25%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-1.5"><div class="bg-success h-1.5 rounded-full" style="width: 25%"></div></div>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="glass-card p-5 rounded-xl border border-white/5 flex flex-col justify-center">
+                        <h3 class="text-white font-bold mb-4">Device Demographics</h3>
+                         <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-gray-300"><i class="fas fa-desktop mr-2 text-primary"></i> Desktop</span><span class="text-white font-bold">60%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-1.5"><div class="bg-primary h-1.5 rounded-full" style="width: 60%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-gray-300"><i class="fas fa-mobile-alt mr-2 text-warning"></i> Mobile</span><span class="text-white font-bold">35%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-1.5"><div class="bg-warning h-1.5 rounded-full" style="width: 35%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1"><span class="text-gray-300"><i class="fas fa-tablet-alt mr-2 text-danger"></i> Tablet</span><span class="text-white font-bold">5%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-1.5"><div class="bg-danger h-1.5 rounded-full" style="width: 5%"></div></div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div> <!-- End Analytics Section -->
+
+            <!-- ICE Logs Section -->
+            <div id="section-ice-logs" class="dashboard-section hidden space-y-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-white">Full ICE Candidate Logs</h2>
+                    <div class="bg-dark border border-white/10 rounded-lg flex overflow-hidden">
+                        <input type="text" placeholder="Search Session ID..." class="bg-transparent text-sm text-white px-4 py-2 outline-none w-64 focus:bg-white/5">
+                        <button class="bg-white/5 px-4 text-gray-400 hover:text-white"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl border border-white/5 overflow-hidden p-1">
+                    <div class="bg-black/50 font-mono text-xs text-gray-300 p-4 rounded-lg overflow-y-auto h-[500px] space-y-2">
+                        <div class="flex gap-4"><span class="text-gray-500">[12:45:01]</span><span class="text-primary">INFO</span><span>Gathering ICE candidates for session sess_8f92a1</span></div>
+                        <div class="flex gap-4"><span class="text-gray-500">[12:45:01]</span><span class="text-primary">INFO</span><span>Candidate: candidate:842163049 1 udp 1677729535 192.168.1.100 50021 typ srflx raddr 10.0.0.1 rport 50021</span></div>
+                        <div class="flex gap-4"><span class="text-gray-500">[12:45:02]</span><span class="text-success">SUCCESS</span><span>ICE connection state changed to: connected</span></div>
+                        <div class="flex gap-4"><span class="text-gray-500">[12:46:15]</span><span class="text-primary">INFO</span><span>Gathering ICE candidates for session sess_b47c00</span></div>
+                        <div class="flex gap-4"><span class="text-gray-500">[12:46:16]</span><span class="text-warning">WARN</span><span>STUN timeout on 192.168.1.5, trying TURN relay</span></div>
+                        <div class="flex gap-4"><span class="text-gray-500">[12:46:17]</span><span class="text-primary">INFO</span><span>Candidate: candidate:1 1 tcp 1015022335 54.12.33.44 9000 typ relay raddr 0.0.0.0 rport 0</span></div>
+                        <div class="flex gap-4"><span class="text-gray-500">[12:46:18]</span><span class="text-success">SUCCESS</span><span>ICE connection state changed to: connected via relay</span></div>
+                        <div class="flex gap-4"><span class="text-gray-500">[12:50:05]</span><span class="text-primary">INFO</span><span>Gathering ICE candidates for session sess_1e39b2</span></div>
+                        <div class="flex gap-4"><span class="text-gray-500">[12:50:15]</span><span class="text-danger">ERROR</span><span>ICE connection state changed to: failed</span></div>
+                        <div class="flex gap-4"><span class="text-gray-500">[12:50:15]</span><span class="text-danger">ERROR</span><span>All candidates failed for sess_1e39b2</span></div>
+                    </div>
+                </div>
+            </div> <!-- End ICE Logs Section -->
+
+            <!-- Settings Section -->
+            <div id="section-settings" class="dashboard-section hidden space-y-6">
+                <h2 class="text-2xl font-bold text-white mb-4">Platform Settings</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-1 space-y-2">
+                        <button class="w-full text-left px-4 py-3 rounded-lg bg-primary/10 text-primary border border-primary/20 font-medium">General Settings</button>
+                        <button class="w-full text-left px-4 py-3 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition">API Keys</button>
+                        <button class="w-full text-left px-4 py-3 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition">WebRTC Configuration</button>
+                        <button class="w-full text-left px-4 py-3 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition">Billing</button>
+                    </div>
+                    
+                    <div class="lg:col-span-2 glass-card p-6 rounded-xl border border-white/5">
+                        <h3 class="text-xl font-bold text-white mb-6">General Settings</h3>
+                        
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Project Name</label>
+                                    <input type="text" value="RTCForge Production" class="w-full bg-dark border border-white/10 rounded-lg px-4 py-2.5 text-white focus:border-primary outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Environment</label>
+                                    <select class="w-full bg-dark border border-white/10 rounded-lg px-4 py-2.5 text-white focus:border-primary outline-none">
+                                        <option>Production</option>
+                                        <option>Staging</option>
+                                        <option>Development</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <hr class="border-white/5 my-4">
+                            
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Data Retention Policy</label>
+                                <select class="w-full bg-dark border border-white/10 rounded-lg px-4 py-2.5 text-white focus:border-primary outline-none">
+                                    <option>30 Days (Standard)</option>
+                                    <option>90 Days</option>
+                                    <option>1 Year</option>
+                                    <option>Indefinite</option>
+                                </select>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5">
+                                <div>
+                                    <div class="text-white font-medium">Automatic Backups</div>
+                                    <div class="text-sm text-gray-400">Backup configuration data daily</div>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer" checked>
+                                    <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                                </label>
+                            </div>
+                            
+                            <div class="pt-4 text-right">
+                                <button type="button" class="bg-primary text-dark font-bold px-6 py-2 rounded-lg hover:bg-primary/90 transition">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- End Settings Section -->
+        </main>
+    </div>
+
+    <script>
+        // Section Switching Logic
+        function switchSection(sectionId, event) {
+            if(event) event.preventDefault();
+            
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(sec => {
+                sec.classList.remove('block');
+                sec.classList.add('hidden');
+            });
+            
+            // Show target section
+            const target = document.getElementById('section-' + sectionId);
+            if(target) {
+                target.classList.remove('hidden');
+                target.classList.add('block');
+            }
+            
+            // Update active state in nav
+            document.querySelectorAll('.nav-item').forEach(link => {
+                link.classList.remove('bg-primary/10', 'text-primary', 'border-primary/20');
+                link.classList.add('text-gray-400');
+            });
+            
+            const activeLink = document.querySelector(`a[data-section="${sectionId}"]`);
+            if(activeLink) {
+                activeLink.classList.remove('text-gray-400');
+                activeLink.classList.add('bg-primary/10', 'text-primary', 'border-primary/20');
+            }
+
+            // Close sidebar on mobile/tab after selection
+            if (window.innerWidth < 1024) {
+                closeSidebar();
+            }
+        }
+
+        // Mobile Sidebar Toggle
+        const sidebar = document.getElementById('dashboard-sidebar');
+        const menuBtn = document.getElementById('dashboard-menu-btn');
+        const closeBtn = document.getElementById('close-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        if (menuBtn) menuBtn.addEventListener('click', openSidebar);
+        if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+        if (overlay) overlay.addEventListener('click', closeSidebar);
+
+        // Specific Dashboard Charts
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctxLatency = document.getElementById('mainLatencyChart');
+            if(ctxLatency) {
+                new Chart(ctxLatency, {
+                    type: 'line',
+                    data: {
+                        labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                        datasets: [{
+                            label: 'Avg RTT (ms)',
+                            data: [25, 22, 45, 30, 20, 24],
+                            borderColor: '#00D2FF',
+                            backgroundColor: 'rgba(0, 210, 255, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: 'rgba(255,255,255,0.05)' } }, x: { grid: { color: 'rgba(255,255,255,0.05)' } } } }
+                });
+            }
+
+            const ctxType = document.getElementById('connTypeChart');
+            if(ctxType) {
+                new Chart(ctxType, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['P2P (Host)', 'STUN (Srflx)', 'TURN (Relay)'],
+                        datasets: [{
+                            data: [65, 16.5, 18.5],
+                            backgroundColor: ['#22C55E', '#00D2FF', '#F59E0B'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8' } } }, cutout: '75%' }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
