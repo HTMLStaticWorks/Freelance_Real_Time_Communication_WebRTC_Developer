@@ -69,6 +69,10 @@ body.light-mode .glass.bg-blend-overlay {
     background-blend-mode: normal !important;
 }
 
+body.light-mode .p2p-flow-line {
+    stroke: rgba(34, 197, 94, 0.75) !important;
+}
+
 /* Mobile Menu Icons Light Mode */
 body.light-mode #mobile-menu-btn,
 body.light-mode #close-menu-btn,
@@ -83,6 +87,23 @@ body.light-mode i.fas,
 body.light-mode i.fab, 
 body.light-mode i.far {
     color: inherit;
+}
+
+body.light-mode .pricing-roi-section .roi-status-icon {
+    opacity: 0.28 !important;
+}
+
+body.light-mode .pricing-roi-section .fa-times-circle {
+    color: #dc2626 !important;
+}
+
+body.light-mode .pricing-roi-section .fa-check-circle {
+    color: #16a34a !important;
+}
+
+body.light-mode .pricing-roi-section .roi-flow-icon,
+body.light-mode .pricing-roi-section .fa-angle-double-right {
+    color: #0f172a !important;
 }
 
 body.light-mode .bg-white\/5,
